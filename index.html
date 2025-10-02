@@ -4,15 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive AI Opportunity Scoring Framework</title>
-    <!-- Chosen Palette: Corporate Blueprint -->
-    <!-- Application Structure Plan: The application is structured as an interactive dashboard. The user first sees an overview of the S2A protocol. The core of the app is the "Interactive Scorer," where users can adjust scores for the five dimensions using sliders. As they adjust a score, the corresponding rubric details (evidence, challenges) update in real-time. This interaction immediately updates a "Live Audit Report" section, which includes dynamic charts and summary text. This structure was chosen to transform the static framework into a hands-on learning and simulation tool, allowing users to understand the cause-and-effect relationship between dimensional scores and the final audit output in an intuitive, engaging way. -->
-    <!-- Visualization & Content Choices: 
-        - S2A Protocol: Goal: Organize. Method: HTML/CSS Flexbox diagram. Interaction: None. Justification: Clearly visualizes the mandatory 5-step process. No SVG/Mermaid used.
-        - Dimensional Scores: Goal: Compare. Method: Chart.js Bar Chart. Interaction: Dynamically updates from sliders. Justification: Provides an immediate visual comparison of the five assessed areas. Library: Chart.js (Canvas).
-        - Overall AI Opportunity Score: Goal: Inform. Method: Chart.js Donut Chart. Interaction: Dynamically updates from sliders. Justification: A clean, compelling way to show a single key metric. Library: Chart.js (Canvas).
-        - Interactive Rubrics: Goal: Interact/Explore. Method: HTML sliders and dynamic text blocks. Interaction: User drags sliders to change scores. Justification: This is the core interactive element, allowing users to actively explore the detailed scoring criteria for any given score. Method: Vanilla JS.
-        - NO SVG/Mermaid used. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -63,15 +54,20 @@
         .secondary-button:hover { background-color: #CED4DA; }
     </style>
 </head>
-<body class="antialiased">
+<body class="text-slate-700">
 
-    <div class="container mx-auto p-4 md:p-8">
-        
-        <header class="text-center mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold brand-text">Interactive AI Opportunity Scoring Framework</h1>
-            <p class="text-lg text-gray-600 mt-2">v2.0 (IA-AIOS-S2A)</p>
+    <main class="container mx-auto p-0 md:p-8">
+
+        <header class="relative mb-8 w-full">
+            <div class="relative w-full h-[400px] md:h-[500px] overflow-hidden">
+                <img src="assets/simpsons.jpg" alt="The Simpsons family sitting on their iconic couch, as requested for the brand theme." class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white"></div>
+            </div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white drop-shadow-2xl mb-2">AI Opportunity Audit</h1>
+                <p class="text-2xl md:text-3xl font-semibold text-white drop-shadow-lg">Word of Mouth Agency | Digital Marketing</p>
+            </div>
         </header>
-
         <section id="audio-overview" class="mb-12">
             <h2 class="text-2xl font-semibold brand-text text-center mb-4">Audio Overview</h2>
             <div class="max-w-xl mx-auto bg-white p-4 rounded-lg shadow-md">
@@ -92,19 +88,19 @@
                 <div class="p-4 bg-white rounded-lg shadow-md w-full md:w-1/6">
                     <p class="text-xl font-bold brand-text">1. Evidence</p><p class="text-sm">Collect Factual Observations</p>
                 </div>
-                <div class="text-2xl text-[#60A5FA] font-bold self-center">→</div>
+                <div class="text-2xl text-[#60A5FA] font-bold self-center hidden md:block">→</div>
                 <div class="p-4 bg-white rounded-lg shadow-md w-full md:w-1/6">
                     <p class="text-xl font-bold brand-text">2. Scoring</p><p class="text-sm">Assign Provisional Scores</p>
                 </div>
-                <div class="text-2xl text-[#60A5FA] font-bold self-center">→</div>
+                <div class="text-2xl text-[#60A5FA] font-bold self-center hidden md:block">→</div>
                 <div class="p-4 bg-[#2A628F] text-white rounded-lg shadow-xl w-full md:w-1/6 border-2 border-[#0D3B66]">
                     <p class="text-xl font-bold">3. Validation</p><p class="text-sm">Apply S2A Cognitive Brake</p>
                 </div>
-                <div class="text-2xl text-[#60A5FA] font-bold self-center">→</div>
+                <div class="text-2xl text-[#60A5FA] font-bold self-center hidden md:block">→</div>
                  <div class="p-4 bg-white rounded-lg shadow-md w-full md:w-1/6">
                     <p class="text-xl font-bold brand-text">4. Document</p><p class="text-sm">Record Reasoning Chain</p>
                 </div>
-                <div class="text-2xl text-[#60A5FA] font-bold self-center">→</div>
+                <div class="text-2xl text-[#60A5FA] font-bold self-center hidden md:block">→</div>
                 <div class="p-4 bg-white rounded-lg shadow-md w-full md:w-1/6">
                     <p class="text-xl font-bold brand-text">5. Finalize</p><p class="text-sm">Confirm Validated Score</p>
                 </div>
@@ -123,7 +119,7 @@
                     <div>
                         <h3 class="text-lg font-semibold text-gray-700">Overall AI Opportunity Score</h3>
                         <div class="relative">
-                             <div class="chart-container h-48"><canvas id="overallScoreChart"></canvas></div>
+                             <div class="chart-container h-48"><canvas id="overallScoreChart" role="img"></canvas></div>
                              <div id="overallScoreText" class="absolute inset-0 flex items-center justify-center text-5xl font-bold brand-text"></div>
                         </div>
                     </div>
@@ -134,7 +130,7 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold text-gray-700 text-center mb-4">Dimensional Scoring</h3>
-                    <div class="chart-container h-64"><canvas id="dimensionalScoreChart"></canvas></div>
+                    <div class="chart-container h-64"><canvas id="dimensionalScoreChart" role="img"></canvas></div>
                 </div>
             </section>
         </div>
@@ -152,168 +148,181 @@
         <footer class="mt-16 pt-8 border-t border-gray-300 text-center">
             <h2 class="text-3xl font-bold brand-text mb-8">Downloads & Resources</h2>
             <div class="flex flex-col md:flex-row justify-center items-center gap-4">
-                <!-- ANNOTATION: Paste the direct link to the combined PDF/ZIP file in the href attribute below -->
                 <a href="assets/wom.zip" download="Download All" class="w-full md:w-auto px-8 py-3 brand-button text-white font-bold rounded-lg shadow-lg text-lg">
                     Download Full Report
                 </a>
-                <!-- ANNOTATION: Paste the direct link to the personalized notebook LLM in the href attribute below -->
                 <a href="https://notebooklm.google.com/notebook/b0243d11-8dc0-4ff8-b1bd-a955f2fe8a58" class="w-full md:w-auto px-8 py-3 secondary-button font-bold rounded-lg shadow-lg text-lg">
                     Access Your Personalized LLM Notebook
                 </a>
             </div>
         </footer>
 
-    </div>
+    </main>
 
     <script>
-        const frameworkData = {
-            c_experience: {
-                name: "Customer Experience Optimization", weight: 0.30, score: 75,
-                rubrics: {
-                    inadequate: { band: "Below 60: Inadequate", evidence: "Functional issues, poor navigation, missing critical elements.", challenge: "Are these issues definitively present or am I inferring problems?" },
-                    basic: { band: "60-69: Basic", evidence: "Website functions, contact information present, basic mobile compatibility.", challenge: "What specific limitations prevent higher scoring?" },
-                    good: { band: "70-79: Good", evidence: "Functional navigation, clear contact info, professional appearance.", challenge: "Are these truly 'good' features or just basic requirements?" },
-                    advanced: { band: "80-89: Advanced", evidence: "Professional design, clear navigation, multiple contact options, responsive elements.", challenge: "What differentiates this from 'good' rather than 'advanced'?" },
-                    exceptional: { band: "90-100: Exceptional", evidence: "Interactive elements, personalization visible, multiple engagement paths, clear mobile optimization.", challenge: "Can I point to specific features that create exceptional experience?" }
-                }
-            },
-            o_process: {
-                name: "Operational Process Indicators", weight: 0.25, score: 65,
-                rubrics: {
-                    inadequate: { band: "Below 60: Inadequate", evidence: "Manual processes only, limited digital integration.", challenge: "Is this inadequacy real or am I applying inappropriate standards?" },
-                    basic: { band: "60-69: Basic", evidence: "Contact methods present, service descriptions available.", challenge: "What processes are actually missing that should be present?" },
-                    good: { band: "70-79: Good", evidence: "Contact forms, basic service information, some process digitization.", challenge: "Are these processes actually efficient or just present?" },
-                    advanced: { band: "80-89: Advanced", evidence: "Some online processes, client portals, document handling capability.", challenge: "What makes these processes 'advanced' rather than standard?" },
-                    exceptional: { band: "90-100: Exceptional", evidence: "Online booking/scheduling, automated workflows visible, integration points clear.", challenge: "Can I observe these processes or am I assuming their existence?" }
-                }
-            },
-            c_management: {
-                name: "Content Management Efficiency", weight: 0.20, score: 80,
-                rubrics: {
-                    inadequate: { band: "Below 60: Inadequate", evidence: "Outdated content, poor organization, missing information.", challenge: "Are these content issues definitive or could there be valid reasons?" },
-                    basic: { band: "60-69: Basic", evidence: "Content present, some organization visible.", challenge: "What specific content management issues are observable?" },
-                    good: { band: "70-79: Good", evidence: "Reasonably current content, logical organization.", challenge: "Is this truly 'good' or just adequate?" },
-                    advanced: { band: "80-89: Advanced", evidence: "Regular updates, organized structure, current information.", challenge: "What indicates advanced management vs. good maintenance?" },
-                    exceptional: { band: "90-100: Exceptional", evidence: "Fresh content, consistent updates, dynamic elements, systematic content organization.", challenge: "How do I know content management is efficient vs. just well-maintained?" }
-                }
-            },
-            d_utilization: {
-                name: "Data Utilization Maturity", weight: 0.15, score: 55,
-                rubrics: {
-                    inadequate: { band: "Below 60: Inadequate", evidence: "No visible data collection, no analytics implementation.", challenge: "Could there be backend data usage I cannot observe?" },
-                    basic: { band: "60-69: Basic", evidence: "Contact form data collection, basic metrics possible.", challenge: "What data utilization opportunities are clearly missing?" },
-                    good: { band: "70-79: Good", evidence: "Basic analytics, some data collection, performance monitoring.", challenge: "How do I know data is actually being utilized effectively?" },
-                    advanced: { band: "80-89: Advanced", evidence: "Some personalization, tracking implementation, data collection points.", challenge: "What makes this data usage 'advanced' rather than standard?" },
-                    exceptional: { band: "90-100: Exceptional", evidence: "Analytics integration visible, personalization present, data-driven features.", challenge: "Can I actually observe data utilization or am I inferring sophistication?" }
-                }
-            },
-            t_readiness: {
-                name: "Technical Readiness", weight: 0.10, score: 90,
-                rubrics: {
-                    inadequate: { band: "Below 60: Inadequate", evidence: "Performance issues, compatibility problems, outdated technology.", challenge: "Are these technical issues definitive barriers or fixable problems?" },
-                    basic: { band: "60-69: Basic", evidence: "Website functions, basic mobile support.", challenge: "What technical limitations would hinder AI implementation?" },
-                    good: { band: "70-79: Good", evidence: "Functional performance, mobile compatibility, standard features.", challenge: "Are these technical capabilities sufficient for basic AI implementation?" },
-                    advanced: { band: "80-89: Advanced", evidence: "Good performance metrics, responsive design, integration capability.", challenge: "What technical elements indicate AI implementation readiness?" },
-                    exceptional: { band: "90-100: Exceptional", evidence: "Fast loading, mobile optimized, modern technology stack visible.", challenge: "Does technical performance truly predict AI implementation success?" }
-                }
-            }
-        };
-
-        let overallScoreChart, dimensionalScoreChart;
-
-        const getRubricForScore = (dimensionKey, score) => {
-            const rubrics = frameworkData[dimensionKey].rubrics;
-            if (score >= 90) return rubrics.exceptional;
-            if (score >= 80) return rubrics.advanced;
-            if (score >= 70) return rubrics.good;
-            if (score >= 60) return rubrics.basic;
-            return rubrics.inadequate;
-        };
-        
-        const updateUI = () => {
-            let totalWeightedScore = 0;
-            const dimensionScores = [];
-            for (const key in frameworkData) {
-                const dimension = frameworkData[key];
-                totalWeightedScore += dimension.score * dimension.weight;
-                dimensionScores.push(dimension.score);
-                const rubric = getRubricForScore(key, dimension.score);
-                document.getElementById(`rubric-band-${key}`).textContent = rubric.band;
-                document.getElementById(`rubric-evidence-${key}`).textContent = rubric.evidence;
-                document.getElementById(`rubric-challenge-${key}`).textContent = rubric.challenge;
-                document.getElementById(`score-value-${key}`).textContent = dimension.score;
-            }
-            const finalScore = Math.round(totalWeightedScore);
-            document.getElementById('overallScoreText').textContent = finalScore;
-            let readiness = "Low";
-            if (finalScore >= 80) readiness = "High";
-            else if (finalScore >= 65) readiness = "Medium";
-            document.getElementById('readinessText').textContent = readiness;
-            overallScoreChart.data.datasets[0].data = [finalScore, 100 - finalScore];
-            overallScoreChart.update();
-            dimensionalScoreChart.data.datasets[0].data = dimensionScores;
-            dimensionalScoreChart.update();
-        };
-
-        const createSliders = () => {
-            const container = document.getElementById('sliders-container');
-            for (const key in frameworkData) {
-                const dimension = frameworkData[key];
-                const sliderHTML = `
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label for="slider-${key}" class="text-lg font-semibold text-[#2A628F]">${dimension.name}</label>
-                            <span id="score-value-${key}" class="text-lg font-bold brand-text">${dimension.score}</span>
-                        </div>
-                        <input type="range" id="slider-${key}" min="0" max="100" value="${dimension.score}" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-                        <div id="rubric-${key}" class="mt-4 p-4 bg-gray-50 rounded-md border border-gray-200">
-                           <p class="font-bold text-gray-800" id="rubric-band-${key}"></p>
-                           <p class="mt-1"><span class="font-semibold">Evidence:</span> <span class="text-gray-600" id="rubric-evidence-${key}"></span></p>
-                           <p class="mt-1"><span class="font-semibold">S2A Challenge:</span> <span class="text-gray-600" id="rubric-challenge-${key}"></span></p>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += sliderHTML;
-            }
-            for (const key in frameworkData) {
-                document.getElementById(`slider-${key}`).addEventListener('input', (e) => {
-                    frameworkData[key].score = parseInt(e.target.value);
-                    updateUI();
-                });
-            }
-        };
-        
-        const initializeCharts = () => {
-            const overallCtx = document.getElementById('overallScoreChart').getContext('2d');
-            overallScoreChart = new Chart(overallCtx, {
-                type: 'doughnut',
-                data: {
-                    datasets: [{ data: [0, 100], backgroundColor: ['#2A628F', '#E5E7EB'], borderColor: '#FFFFFF', borderWidth: 4, cutout: '75%' }]
+        document.addEventListener('DOMContentLoaded', () => {
+            const frameworkData = {
+                c_experience: {
+                    name: "Customer Experience Optimization", weight: 0.30, score: 75,
+                    rubrics: {
+                        inadequate: { band: "Below 60: Inadequate", evidence: "Functional issues, poor navigation, missing critical elements.", challenge: "Are these issues definitively present or am I inferring problems?" },
+                        basic: { band: "60-69: Basic", evidence: "Website functions, contact information present, basic mobile compatibility.", challenge: "What specific limitations prevent higher scoring?" },
+                        good: { band: "70-79: Good", evidence: "Functional navigation, clear contact info, professional appearance.", challenge: "Are these truly 'good' features or just basic requirements?" },
+                        advanced: { band: "80-89: Advanced", evidence: "Professional design, clear navigation, multiple contact options, responsive elements.", challenge: "What differentiates this from 'good' rather than 'advanced'?" },
+                        exceptional: { band: "90-100: Exceptional", evidence: "Interactive elements, personalization visible, multiple engagement paths, clear mobile optimization.", challenge: "Can I point to specific features that create exceptional experience?" }
+                    }
                 },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } } }
-            });
-            const dimensionalCtx = document.getElementById('dimensionalScoreChart').getContext('2d');
-            dimensionalScoreChart = new Chart(dimensionalCtx, {
-                type: 'bar',
-                data: {
-                    labels: Object.values(frameworkData).map(d => d.name.split(' ')),
-                    datasets: [{ label: 'Dimension Score', data: [], backgroundColor: ['#0D3B66', '#2A628F', '#60A5FA', '#93C5FD', '#BFDBFE'], borderRadius: 4 }]
+                o_process: {
+                    name: "Operational Process Indicators", weight: 0.25, score: 65,
+                    rubrics: {
+                        inadequate: { band: "Below 60: Inadequate", evidence: "Manual processes only, limited digital integration.", challenge: "Is this inadequacy real or am I applying inappropriate standards?" },
+                        basic: { band: "60-69: Basic", evidence: "Contact methods present, service descriptions available.", challenge: "What processes are actually missing that should be present?" },
+                        good: { band: "70-79: Good", evidence: "Contact forms, basic service information, some process digitization.", challenge: "Are these processes actually efficient or just present?" },
+                        advanced: { band: "80-89: Advanced", evidence: "Some online processes, client portals, document handling capability.", challenge: "What makes these processes 'advanced' rather than standard?" },
+                        exceptional: { band: "90-100: Exceptional", evidence: "Online booking/scheduling, automated workflows visible, integration points clear.", challenge: "Can I observe these processes or am I assuming their existence?" }
+                    }
                 },
-                options: {
-                    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
-                    scales: {
-                        x: { beginAtZero: true, max: 100, grid: { display: false }, ticks: { font: { size: 14 }}},
-                        y: { grid: { display: false }, ticks: { font: { size: 14 }} }
-                    },
-                    plugins: { 
-                        legend: { display: false },
-                        tooltip: { callbacks: { title: (tooltipItems) => { return tooltipItems[0].label.replaceAll(',', ' '); } } }
+                c_management: {
+                    name: "Content Management Efficiency", weight: 0.20, score: 80,
+                    rubrics: {
+                        inadequate: { band: "Below 60: Inadequate", evidence: "Outdated content, poor organization, missing information.", challenge: "Are these content issues definitive or could there be valid reasons?" },
+                        basic: { band: "60-69: Basic", evidence: "Content present, some organization visible.", challenge: "What specific content management issues are observable?" },
+                        good: { band: "70-79: Good", evidence: "Reasonably current content, logical organization.", challenge: "Is this truly 'good' or just adequate?" },
+                        advanced: { band: "80-89: Advanced", evidence: "Regular updates, organized structure, current information.", challenge: "What indicates advanced management vs. good maintenance?" },
+                        exceptional: { band: "90-100: Exceptional", evidence: "Fresh content, consistent updates, dynamic elements, systematic content organization.", challenge: "How do I know content management is efficient vs. just well-maintained?" }
+                    }
+                },
+                d_utilization: {
+                    name: "Data Utilization Maturity", weight: 0.15, score: 55,
+                    rubrics: {
+                        inadequate: { band: "Below 60: Inadequate", evidence: "No visible data collection, no analytics implementation.", challenge: "Could there be backend data usage I cannot observe?" },
+                        basic: { band: "60-69: Basic", evidence: "Contact form data collection, basic metrics possible.", challenge: "What data utilization opportunities are clearly missing?" },
+                        good: { band: "70-79: Good", evidence: "Basic analytics, some data collection, performance monitoring.", challenge: "How do I know data is actually being utilized effectively?" },
+                        advanced: { band: "80-89: Advanced", evidence: "Some personalization, tracking implementation, data collection points.", challenge: "What makes this data usage 'advanced' rather than standard?" },
+                        exceptional: { band: "90-100: Exceptional", evidence: "Analytics integration visible, personalization present, data-driven features.", challenge: "Can I actually observe data utilization or am I inferring sophistication?" }
+                    }
+                },
+                t_readiness: {
+                    name: "Technical Readiness", weight: 0.10, score: 90,
+                    rubrics: {
+                        inadequate: { band: "Below 60: Inadequate", evidence: "Performance issues, compatibility problems, outdated technology.", challenge: "Are these technical issues definitive barriers or fixable problems?" },
+                        basic: { band: "60-69: Basic", evidence: "Website functions, basic mobile support.", challenge: "What technical limitations would hinder AI implementation?" },
+                        good: { band: "70-79: Good", evidence: "Functional performance, mobile compatibility, standard features.", challenge: "Are these technical capabilities sufficient for basic AI implementation?" },
+                        advanced: { band: "80-89: Advanced", evidence: "Good performance metrics, responsive design, integration capability.", challenge: "What technical elements indicate AI implementation readiness?" },
+                        exceptional: { band: "90-100: Exceptional", evidence: "Fast loading, mobile optimized, modern technology stack visible.", challenge: "Does technical performance truly predict AI implementation success?" }
                     }
                 }
-            });
-        };
+            };
 
-        document.addEventListener('DOMContentLoaded', () => {
+            let overallScoreChart, dimensionalScoreChart;
+
+            const getRubricForScore = (dimensionKey, score) => {
+                const rubrics = frameworkData[dimensionKey].rubrics;
+                if (score >= 90) return rubrics.exceptional;
+                if (score >= 80) return rubrics.advanced;
+                if (score >= 70) return rubrics.good;
+                if (score >= 60) return rubrics.basic;
+                return rubrics.inadequate;
+            };
+
+            const updateUI = () => {
+                let totalWeightedScore = 0;
+                const dimensionScores = [];
+                const dimensionLabels = [];
+
+                for (const key in frameworkData) {
+                    const dimension = frameworkData[key];
+                    totalWeightedScore += dimension.score * dimension.weight;
+                    dimensionScores.push(dimension.score);
+                    dimensionLabels.push(dimension.name);
+                    
+                    const rubric = getRubricForScore(key, dimension.score);
+                    document.getElementById(`rubric-band-${key}`).textContent = rubric.band;
+                    document.getElementById(`rubric-evidence-${key}`).textContent = rubric.evidence;
+                    document.getElementById(`rubric-challenge-${key}`).textContent = rubric.challenge;
+                    document.getElementById(`score-value-${key}`).textContent = dimension.score;
+                }
+
+                const finalScore = Math.round(totalWeightedScore);
+                document.getElementById('overallScoreText').textContent = finalScore;
+
+                let readiness = "Low";
+                if (finalScore >= 80) readiness = "High";
+                else if (finalScore >= 65) readiness = "Medium";
+                document.getElementById('readinessText').textContent = readiness;
+
+                // Update charts
+                overallScoreChart.data.datasets[0].data = [finalScore, 100 - finalScore];
+                overallScoreChart.update();
+                dimensionalScoreChart.data.datasets[0].data = dimensionScores;
+                dimensionalScoreChart.update();
+
+                // Update ARIA labels for accessibility
+                document.getElementById('overallScoreChart').ariaLabel = `Donut chart showing an overall AI opportunity score of ${finalScore} out of 100.`;
+                const dimensionalAriaLabel = 'Bar chart showing dimensional scores. ' + dimensionLabels.map((label, index) => `${label}: ${dimensionScores[index]} out of 100`).join('. ');
+                document.getElementById('dimensionalScoreChart').ariaLabel = dimensionalAriaLabel;
+            };
+
+            const createSliders = () => {
+                const container = document.getElementById('sliders-container');
+                for (const key in frameworkData) {
+                    const dimension = frameworkData[key];
+                    const sliderHTML = `
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label for="slider-${key}" class="text-lg font-semibold text-[#2A628F]">${dimension.name}</label>
+                                <span id="score-value-${key}" class="text-lg font-bold brand-text">${dimension.score}</span>
+                            </div>
+                            <input type="range" id="slider-${key}" min="0" max="100" value="${dimension.score}" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                            <div id="rubric-${key}" class="mt-4 p-4 bg-gray-50 rounded-md border border-gray-200">
+                               <p class="font-bold text-gray-800" id="rubric-band-${key}"></p>
+                               <p class="mt-1"><span class="font-semibold">Evidence:</span> <span class="text-gray-600" id="rubric-evidence-${key}"></span></p>
+                               <p class="mt-1"><span class="font-semibold">S2A Challenge:</span> <span class="text-gray-600" id="rubric-challenge-${key}"></span></p>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += sliderHTML;
+                }
+                // Add event listeners after all HTML is inserted
+                for (const key in frameworkData) {
+                    document.getElementById(`slider-${key}`).addEventListener('input', (e) => {
+                        frameworkData[key].score = parseInt(e.target.value);
+                        updateUI();
+                    });
+                }
+            };
+
+            const initializeCharts = () => {
+                const overallCtx = document.getElementById('overallScoreChart').getContext('2d');
+                overallScoreChart = new Chart(overallCtx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{ data: [0, 100], backgroundColor: ['#2A628F', '#E5E7EB'], borderColor: '#FFFFFF', borderWidth: 4, cutout: '75%' }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } } }
+                });
+
+                const dimensionalCtx = document.getElementById('dimensionalScoreChart').getContext('2d');
+                dimensionalScoreChart = new Chart(dimensionalCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.values(frameworkData).map(d => d.name.split(' ')),
+                        datasets: [{ label: 'Dimension Score', data: [], backgroundColor: ['#0D3B66', '#2A628F', '#60A5FA', '#93C5FD', '#BFDBFE'], borderRadius: 4 }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                        scales: {
+                            x: { beginAtZero: true, max: 100, grid: { display: false }, ticks: { font: { size: 14 }}},
+                            y: { grid: { display: false }, ticks: { font: { size: 14 }} }
+                        },
+                        plugins: { 
+                            legend: { display: false },
+                            tooltip: { callbacks: { title: (tooltipItems) => { return tooltipItems[0].label.replaceAll(',', ' '); } } }
+                        }
+                    }
+                });
+            };
+
             createSliders();
             initializeCharts();
             updateUI();
